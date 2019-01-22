@@ -61,7 +61,9 @@ class SimpleGoBoard(object):
         self.current_player = BLACK
         self.maxpoint = size * size + 3 * (size + 1)
         self.board = np.full(self.maxpoint, BORDER, dtype = np.int32)
-        self._initialize_empty_points(self.board) 
+        self._initialize_empty_points(self.board)
+        
+        
 
     def copy(self):
         b = SimpleGoBoard(self.size)
@@ -162,38 +164,19 @@ class SimpleGoBoard(object):
             if len(captures) == 1:
                 single_capture = nb_point
         return single_capture
+    
+    def board_state(self):
+        return
 
     def play_move(self, point, color):
         """
         Play a move of color on point
         Returns boolean: whether move was legal
         """
+
         if self.board[point] != EMPTY:
             return False
         self.board[point] = color
-        return True
-            
-        # General case: deal with captures, suicide, and next ko point
-        
-        # Get rid of for gomoku
-        oppColor = GoBoardUtil.opponent(color)
-        in_enemy_eye = self._is_surrounded(point, oppColor)
-        self.board[point] = color
-        single_captures = []
-        neighbors = self._neighbors(point)
-        for nb in neighbors:
-            if self.board[nb] == oppColor:
-                single_capture = self._detect_and_process_capture(nb)
-                if single_capture != None:
-                    single_captures.append(single_capture)
-        block = self._block_of(point)
-        if not self._has_liberty(block): # undo suicide move
-            self.board[point] = EMPTY
-            return False
-        self.ko_recapture = None
-        if in_enemy_eye and len(single_captures) == 1:
-            self.ko_recapture = single_captures[0]
-        self.current_player = GoBoardUtil.opponent(color)
         return True
 
     def neighbors_of_color(self, point, color):
