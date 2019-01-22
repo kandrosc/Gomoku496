@@ -168,16 +168,10 @@ class SimpleGoBoard(object):
         Play a move of color on point
         Returns boolean: whether move was legal
         """
-        assert is_black_white(color)
-        # Special cases
-        if point == PASS:
-            self.ko_recapture = None
-            self.current_player = GoBoardUtil.opponent(color)
-            return True
-        elif self.board[point] != EMPTY:
+        if self.board[point] != EMPTY:
             return False
-        if point == self.ko_recapture:
-            return False
+        self.board[point] = color
+        return True
             
         # General case: deal with captures, suicide, and next ko point
         
