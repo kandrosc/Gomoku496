@@ -62,7 +62,15 @@ class SimpleGoBoard(object):
         self.maxpoint = size * size + 3 * (size + 1)
         self.board = np.full(self.maxpoint, BORDER, dtype = np.int32)
         self._initialize_empty_points(self.board)
+        # 3 new variables:  lists that store the integer coordinates of every white and black piece currently on the board
+        # a list to keep track of which points have been checked while checking for a win
         
+        # 1st list: storage
+        # 2nd list: black pieces
+        # 3rd list: white pieces
+        self.store[[],[],[]]
+        
+        self.store=[]
         
 
     def copy(self):
@@ -177,6 +185,10 @@ class SimpleGoBoard(object):
         if self.board[point] != EMPTY:
             return False
         self.board[point] = color
+        
+        self.store[color].append(point)
+        self.store[color].sort()
+
         return True
 
     def neighbors_of_color(self, point, color):
@@ -197,3 +209,101 @@ class SimpleGoBoard(object):
                 point - self.NS + 1, 
                 point + self.NS - 1, 
                 point + self.NS + 1]
+    
+    
+    
+    # function that returns all checked points back to their respective lists
+    def checkout(self,colour):
+        for i in self.store[0]:
+            self.store[colour].append(i)
+        self.store[colour].sort()
+        self.store[0]=[]
+    
+    # function for checking whether or not a win has happened horizontally
+    def checkH(self,point,colour,chain):
+        if chain>0:
+            if self.board[point+1]==colour:
+                self.store[0].append(point+1)
+                self.store[colour].remove(point+1)
+                r=checkH(point+1,colour,chain-1)
+                return r
+            else:
+                return False
+        else:
+            return True
+    
+    def checkV(self,point,colour,chain):
+        if chain>0:
+            if self.board[point+self.NS]==colour:
+                self.store[0].append(point+self.NS)
+                self.store[colour].remove(point+self.NS)
+                r=checkH(point+self.NS,colour,chain-1)
+                return r
+            else:
+                return False
+        else:
+            return True
+    
+    def checkDR(self,point,colour,chain):
+        if chain>0:
+            if self.board[point+self.NS + 1]==colour:
+                self.store[0].append(point+self.NS + 1)
+                self.store[colour].remove(point+self.NS + 1)
+                r=checkH(point+self.NS + 1,colour,chain-1)
+                return r
+            else:
+                return False
+        else:
+            return True
+    
+    def checkDL(self,point,colour,chain):
+        if chain>0:
+            if self.board[point+self.NS - 1]==colour:
+                self.store[0].append(point+self.NS - 1)
+                self.store[colour].remove(point+self.NS - 1)
+                r=checkH(point+self.NS - 1,colour,chain-1)
+                return r
+            else:
+                return False
+        else:
+            return True       
+    
+    
+    
+    def checkWin(self,colour):
+        # check horizontal
+        for i in self.store[colour]:
+            win=checkH(i,colour,5)
+        if not win:
+            self.checkout(colour)
+            for i in self.store[colour]:
+                # check vertical
+                win=checkV(i,WHITE,5)
+            if not win:
+                self.checkout(colour)
+                for i in self.store[colour]:
+                    # check diagonal \
+                    win=checkDR(i,colour,5)
+                if not win:
+                    self.checkout(colour)
+                    for i in self.store[colour]:
+                        # check diagonal /
+                        win=checkDL(i,colour,5)
+                    if not win:
+                        return False
+                    return True
+                return True
+            return True
+        return True
+    
+    
+    
+    # This function will determine which state the board is in, whether white or black won, draw, or unknown
+    def checkState(self):
+        if checkWin(WHITE):
+            return WHITE
+        elif checkWin(BLACK):
+            return BLACK
+        elif self.get_empty_points().size==0:
+            return PASS
+        return -1

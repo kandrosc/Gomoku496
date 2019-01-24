@@ -236,7 +236,15 @@ class GtpConnection():
             
     def gogui_rules_final_result_cmd(self, args):
         """ Implement this function for Assignment 1 """
-        self.respond("unknown")
+        state=self.board.checkState()
+        if state == WHITE:
+            self.respond("white")
+        elif state == BLACK:
+            self.respond("black")
+        elif state == PASS:
+            self.respond("draw")
+        else:
+            self.respond("unknown")
 
     def play_cmd(self, args):
         """ Modify this function for Assignment 1 """
