@@ -179,15 +179,18 @@ class SimpleGoBoard(object):
         Play a move of color on point
         Returns boolean: whether move was legal
         """
-
-        if self.board[point] != EMPTY:
+        try:
+            if self.board[point] != EMPTY:
+                return False
+            self.board[point] = color
+            
+            self.store[color].append(point)
+            self.store[color].sort()
+    
+            return True
+        except ValueError:
+            print("Board is full, random move cannot be generated")
             return False
-        self.board[point] = color
-        
-        self.store[color].append(point)
-        self.store[color].sort()
-
-        return True
 
     def neighbors_of_color(self, point, color):
         """ List of neighbors of point of given color """
