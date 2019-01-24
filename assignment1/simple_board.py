@@ -169,6 +169,10 @@ class SimpleGoBoard(object):
         return
 
     def play_move(self, point, color):
+        """
+        Play a move of color on point
+        Returns boolean: whether move was legal
+        """
 
         if self.board[point] != EMPTY:
             return False
