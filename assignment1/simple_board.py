@@ -68,9 +68,7 @@ class SimpleGoBoard(object):
         # 1st list: storage
         # 2nd list: black pieces
         # 3rd list: white pieces
-        self.store[[],[],[]]
-        
-        self.store=[]
+        self.store=[[],[],[]]
         
 
     def copy(self):
@@ -225,7 +223,7 @@ class SimpleGoBoard(object):
             if self.board[point+1]==colour:
                 self.store[0].append(point+1)
                 self.store[colour].remove(point+1)
-                r=checkH(point+1,colour,chain-1)
+                r=self.checkH(point+1,colour,chain-1)
                 return r
             else:
                 return False
@@ -237,7 +235,7 @@ class SimpleGoBoard(object):
             if self.board[point+self.NS]==colour:
                 self.store[0].append(point+self.NS)
                 self.store[colour].remove(point+self.NS)
-                r=checkH(point+self.NS,colour,chain-1)
+                r=self.checkV(point+self.NS,colour,chain-1)
                 return r
             else:
                 return False
@@ -249,7 +247,7 @@ class SimpleGoBoard(object):
             if self.board[point+self.NS + 1]==colour:
                 self.store[0].append(point+self.NS + 1)
                 self.store[colour].remove(point+self.NS + 1)
-                r=checkH(point+self.NS + 1,colour,chain-1)
+                r=self.checkDR(point+self.NS + 1,colour,chain-1)
                 return r
             else:
                 return False
@@ -261,7 +259,7 @@ class SimpleGoBoard(object):
             if self.board[point+self.NS - 1]==colour:
                 self.store[0].append(point+self.NS - 1)
                 self.store[colour].remove(point+self.NS - 1)
-                r=checkH(point+self.NS - 1,colour,chain-1)
+                r=self.checkDL(point+self.NS - 1,colour,chain-1)
                 return r
             else:
                 return False
@@ -272,23 +270,25 @@ class SimpleGoBoard(object):
     
     def checkWin(self,colour):
         # check horizontal
+        win=False
         for i in self.store[colour]:
-            win=checkH(i,colour,5)
+            win=self.checkH(i,colour,5)
         if not win:
             self.checkout(colour)
             for i in self.store[colour]:
                 # check vertical
-                win=checkV(i,WHITE,5)
+                win=self.checkV(i,WHITE,5)
+                print(win)
             if not win:
                 self.checkout(colour)
                 for i in self.store[colour]:
                     # check diagonal \
-                    win=checkDR(i,colour,5)
+                    win=self.checkDR(i,colour,5)
                 if not win:
                     self.checkout(colour)
                     for i in self.store[colour]:
                         # check diagonal /
-                        win=checkDL(i,colour,5)
+                        win=self.checkDL(i,colour,5)
                     if not win:
                         return False
                     return True
@@ -300,9 +300,9 @@ class SimpleGoBoard(object):
     
     # This function will determine which state the board is in, whether white or black won, draw, or unknown
     def checkState(self):
-        if checkWin(WHITE):
+        if self.checkWin(WHITE):
             return WHITE
-        elif checkWin(BLACK):
+        elif self.checkWin(BLACK):
             return BLACK
         elif self.get_empty_points().size==0:
             return PASS
