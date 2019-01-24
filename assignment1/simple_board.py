@@ -219,7 +219,7 @@ class SimpleGoBoard(object):
     
     # function for checking whether or not a win has happened horizontally
     def checkH(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+1]==colour:
                 self.store[0].append(point+1)
                 self.store[colour].remove(point+1)
@@ -231,7 +231,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkV(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS]==colour:
                 self.store[0].append(point+self.NS)
                 self.store[colour].remove(point+self.NS)
@@ -243,7 +243,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkDR(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS + 1]==colour:
                 self.store[0].append(point+self.NS + 1)
                 self.store[colour].remove(point+self.NS + 1)
@@ -255,7 +255,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkDL(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS - 1]==colour:
                 self.store[0].append(point+self.NS - 1)
                 self.store[colour].remove(point+self.NS - 1)
@@ -273,22 +273,29 @@ class SimpleGoBoard(object):
         win=False
         for i in self.store[colour]:
             win=self.checkH(i,colour,5)
+            if win:
+                break            
         if not win:
             self.checkout(colour)
             for i in self.store[colour]:
                 # check vertical
-                win=self.checkV(i,WHITE,5)
-                print(win)
+                win=self.checkV(i,colour,5)
+                if win:
+                    break
             if not win:
                 self.checkout(colour)
                 for i in self.store[colour]:
                     # check diagonal \
                     win=self.checkDR(i,colour,5)
+                    if win:
+                        break                    
                 if not win:
                     self.checkout(colour)
                     for i in self.store[colour]:
                         # check diagonal /
                         win=self.checkDL(i,colour,5)
+                        if win:
+                            break                        
                     if not win:
                         return False
                     return True
