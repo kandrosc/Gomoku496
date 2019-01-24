@@ -197,12 +197,17 @@ class GtpConnection():
     def gogui_rules_board_size_cmd(self, args):
         """ We already implemented this function for Assignment 1 """
         self.respond(str(self.board.size))
+    def get_board_size(self):
+        return self.board.size
     
     # Modify to produce list of all legal moves
     def gogui_rules_legal_moves_cmd(self, args):
         """ Implement this function for Assignment 1 """
-        self.respond()
-        return
+        s=''
+        emptys=self.board.get_empty_points()
+        for i in emptys:
+            s=s+format_point(point_to_coord(i,self.get_board_size()))+', '
+        self.respond(s)
 
     def gogui_rules_side_to_move_cmd(self, args):
         """ We already implemented this function for Assignment 1 """
