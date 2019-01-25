@@ -317,6 +317,7 @@ class SimpleGoBoard(object):
                         if win:
                             break                        
                     if not win:
+                        self.checkout(colour)
                         return False
                     return True
                 return True
