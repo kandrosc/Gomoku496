@@ -200,16 +200,11 @@ class SimpleGoBoard(object):
                 self.next_color = BLACK+WHITE-color
                 return True
 
-                self.store[color].append(point)
-                self.store[color].sort()
-        
-                return True
             except ValueError:
                 print("Board is full, random move cannot be generated")
                 return False
 
         else:
-                
                 print("Error: Not your turn")
                 return False
 
