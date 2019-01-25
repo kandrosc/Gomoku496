@@ -183,33 +183,36 @@ class SimpleGoBoard(object):
         Play a move of color on point
         Returns boolean: whether move was legal
         """
+
       
         # Ensure the expected player is playing
         if color == self.next_color:
-            print(color)
-            print(self.next_color)
+            
+            try:
+                # Ensure the player is playing on an empty spot
+                if self.board[point] != EMPTY:
+                    return False
+                self.board[point] = color
+                
 
-            # Ensure the player is playing on an empty spot
-            if self.board[point] != EMPTY:
+                self.store[color].append(point)
+                self.store[color].sort()
+                self.next_color = BLACK+WHITE-color
+                return True
+
+                self.store[color].append(point)
+                self.store[color].sort()
+        
+                return True
+            except ValueError:
+                print("Board is full, random move cannot be generated")
                 return False
-            self.board[point] = color
-            
-
-            self.store[color].append(point)
-            self.store[color].sort()
-            self.next_color = BLACK+WHITE-color
-            
-
-            return True
 
         else:
-            
-            print("Error: Not your turn")
-            return False
+                
+                print("Error: Not your turn")
+                return False
 
-        
-
-        
 
     def neighbors_of_color(self, point, color):
         """ List of neighbors of point of given color """
@@ -241,7 +244,7 @@ class SimpleGoBoard(object):
     
     # function for checking whether or not a win has happened horizontally
     def checkH(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+1]==colour:
                 self.store[0].append(point+1)
                 self.store[colour].remove(point+1)
@@ -253,7 +256,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkV(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS]==colour:
                 self.store[0].append(point+self.NS)
                 self.store[colour].remove(point+self.NS)
@@ -265,7 +268,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkDR(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS + 1]==colour:
                 self.store[0].append(point+self.NS + 1)
                 self.store[colour].remove(point+self.NS + 1)
@@ -277,7 +280,7 @@ class SimpleGoBoard(object):
             return True
     
     def checkDL(self,point,colour,chain):
-        if chain>0:
+        if chain>1:
             if self.board[point+self.NS - 1]==colour:
                 self.store[0].append(point+self.NS - 1)
                 self.store[colour].remove(point+self.NS - 1)
@@ -295,22 +298,29 @@ class SimpleGoBoard(object):
         win=False
         for i in self.store[colour]:
             win=self.checkH(i,colour,5)
+            if win:
+                break            
         if not win:
             self.checkout(colour)
             for i in self.store[colour]:
                 # check vertical
-                win=self.checkV(i,WHITE,5)
-                print(win)
+                win=self.checkV(i,colour,5)
+                if win:
+                    break
             if not win:
                 self.checkout(colour)
                 for i in self.store[colour]:
                     # check diagonal \
                     win=self.checkDR(i,colour,5)
+                    if win:
+                        break                    
                 if not win:
                     self.checkout(colour)
                     for i in self.store[colour]:
                         # check diagonal /
                         win=self.checkDL(i,colour,5)
+                        if win:
+                            break                        
                     if not win:
                         return False
                     return True
