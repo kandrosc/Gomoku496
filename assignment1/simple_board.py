@@ -14,7 +14,9 @@ from board_util import GoBoardUtil, BLACK, WHITE, EMPTY, BORDER, \
                        PASS, is_black_white, coord_to_point, where1d, MAXSIZE
 
 class SimpleGoBoard(object):
-
+    # Initialize the previous player to black
+    
+    
     def get_color(self, point):
         return self.board[point]
     
@@ -46,6 +48,7 @@ class SimpleGoBoard(object):
         Creates a Go board of given size
         """
         assert 2 <= size <= MAXSIZE
+       
         self.reset(size)
 
     def reset(self, size):
@@ -54,6 +57,7 @@ class SimpleGoBoard(object):
         The board is stored as a one-dimensional array
         See GoBoardUtil.coord_to_point for explanations of the array encoding
         """
+        self.next_color = BLACK # Stores the color espected to be played next (Black first)
         self.size = size
         self.NS = size + 1
         self.WE = 1
@@ -179,18 +183,31 @@ class SimpleGoBoard(object):
         Play a move of color on point
         Returns boolean: whether move was legal
         """
-        try:
-            if self.board[point] != EMPTY:
-                return False
-            self.board[point] = color
+
+      
+        # Ensure the expected player is playing
+        if color == self.next_color:
             
-            self.store[color].append(point)
-            self.store[color].sort()
-    
-            return True
-        except ValueError:
-            print("Board is full, random move cannot be generated")
-            return False
+            try:
+                # Ensure the player is playing on an empty spot
+                if self.board[point] != EMPTY:
+                    return False
+                self.board[point] = color
+                
+
+                self.store[color].append(point)
+                self.store[color].sort()
+                self.next_color = BLACK+WHITE-color
+                return True
+
+            except ValueError:
+                print("Board is full, random move cannot be generated")
+                return False
+
+        else:
+                print("Error: Not your turn")
+                return False
+
 
     def neighbors_of_color(self, point, color):
         """ List of neighbors of point of given color """
