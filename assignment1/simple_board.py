@@ -184,29 +184,35 @@ class SimpleGoBoard(object):
         Returns boolean: whether move was legal
         """
 
-      
-        # Ensure the expected player is playing
-        if color == self.next_color:
+        # Ensures players can't play after someone already won
+        if (self.checkWin(WHITE) or self.checkWin(BLACK) or self.get_empty_points().size==0):
             
-            try:
-                # Ensure the player is playing on an empty spot
-                if self.board[point] != EMPTY:
-                    return False
-                self.board[point] = color
-                
-
-                self.store[color].append(point)
-                self.store[color].sort()
-                self.next_color = BLACK+WHITE-color
-                return True
-
-            except ValueError:
-                print("Board is full, random move cannot be generated")
-                return False
+            return False
 
         else:
-                print("Error: Not your turn")
-                return False
+      
+            # Ensure the expected player is playing
+            if color == self.next_color:
+                
+                try:
+                    # Ensure the player is playing on an empty spot
+                    if self.board[point] != EMPTY:
+                        return False
+                    self.board[point] = color
+                    
+
+                    self.store[color].append(point)
+                    self.store[color].sort()
+                    self.next_color = BLACK+WHITE-color
+                    return True
+
+                except ValueError:
+                    print("Board is full, random move cannot be generated")
+                    return False
+
+            else:
+                    print("Error: Not your turn")
+                    return False
 
 
     def neighbors_of_color(self, point, color):
