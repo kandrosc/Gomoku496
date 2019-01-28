@@ -25,6 +25,8 @@ class SimpleGoBoard(object):
 
     def pt(self, row, col):
         return coord_to_point(row, col, self.size)
+    def setNext(self,colour):
+        self.next_color=colour
 
     def is_legal(self, point, color):
         """
@@ -33,6 +35,10 @@ class SimpleGoBoard(object):
         board_copy = self.copy()
         # Try to play the move on a temporary copy of board
         # This prevents the board from being messed up by the move
+        
+        if self.next_color==WHITE:
+            board_copy.setNext(WHITE)
+        
         legal = board_copy.play_move(point, color)
         return legal
 
@@ -300,6 +306,7 @@ class SimpleGoBoard(object):
         for i in self.store[colour]:
             win=self.checkH(i,colour,5)
             if win:
+                self.checkout(colour)
                 break            
         if not win:
             self.checkout(colour)
@@ -307,6 +314,7 @@ class SimpleGoBoard(object):
                 # check vertical
                 win=self.checkV(i,colour,5)
                 if win:
+                    self.checkout(colour)
                     break
             if not win:
                 self.checkout(colour)
@@ -314,6 +322,7 @@ class SimpleGoBoard(object):
                     # check diagonal \
                     win=self.checkDR(i,colour,5)
                     if win:
+                        self.checkout(colour)
                         break                    
                 if not win:
                     self.checkout(colour)
@@ -321,6 +330,7 @@ class SimpleGoBoard(object):
                         # check diagonal /
                         win=self.checkDL(i,colour,5)
                         if win:
+                            self.checkout(colour)
                             break                        
                     if not win:
                         self.checkout(colour)
