@@ -31,6 +31,9 @@ class SimpleGoBoard(object):
     
     def getSize(self):
         return self.size
+    
+    def setStore(self,store):
+        self.store=store
 
     def is_legal(self, point, color):
         """
@@ -90,6 +93,7 @@ class SimpleGoBoard(object):
         b.current_player = self.current_player
         assert b.maxpoint == self.maxpoint
         b.board = np.copy(self.board)
+        b.setStore(self.store)
         return b
 
     def row_start(self, row):
