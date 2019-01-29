@@ -25,8 +25,12 @@ class SimpleGoBoard(object):
 
     def pt(self, row, col):
         return coord_to_point(row, col, self.size)
+    
     def setNext(self,colour):
         self.next_color=colour
+    
+    def getSize(self):
+        return self.size
 
     def is_legal(self, point, color):
         """
@@ -217,7 +221,7 @@ class SimpleGoBoard(object):
                     return False
 
             else:
-                    print("Error: Not your turn")
+                    #print("Error: Not your turn")
                     return False
 
 

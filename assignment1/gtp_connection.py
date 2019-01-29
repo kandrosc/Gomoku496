@@ -341,7 +341,7 @@ class GtpConnection():
         moves = GoBoardUtil.generate_legal_moves(self.board, color)
         gtp_moves = []
         for move in moves:
-            coords = point_to_coord(point)
+            coords = point_to_coord(move,self.board.getSize())
             gtp_moves.append(format_point(coords))
         sorted_moves = ' '.join(sorted(gtp_moves))
         self.respond(sorted_moves)
