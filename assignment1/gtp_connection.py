@@ -11,7 +11,7 @@ from sys import stdin, stdout, stderr
 from board_util import GoBoardUtil, BLACK, WHITE, EMPTY, BORDER, PASS, \
                        MAXSIZE, coord_to_point
 import numpy as np
-
+import re
 class GtpConnection():
 
     def __init__(self, go_engine, board, debug_mode = False):
@@ -274,7 +274,7 @@ class GtpConnection():
                 self.debug_msg("Move: {}\nBoard:\n{}\n".
                                 format(board_move, self.board2d()))
             self.respond()
-            print(self.board2d())
+            #print(self.board2d())
         except Exception as e:
             self.respond('Error: {}'.format(str(e)))
             
@@ -287,7 +287,7 @@ class GtpConnection():
         if state==WHITE or state==BLACK:
             self.respond("resign")
         elif state==PASS:
-            self.repsond("pass")
+            self.respond("pass")
         else:
             board_color = args[0].lower()
             color = color_to_int(board_color)
