@@ -1,0 +1,21 @@
+Script started on 2019-01-28 20:54:04-0700
+]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1[00m$ cp assignment1.tgz test
+]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1[00m$ cd test
+]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ cd test[16@p assignment1.tgz[C[C[C[C[Cexit[K[2Plscd ..rm assignment1.tgzls[Kgogui-regress ./Go0.py assignment1-public-tests.gtpp[A]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ cd test[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[16@p assignment1.tgz[C[C[C[C[Cexit[Kgogui-regress ./Go0.py assignment1-public-tests.gtpp[A]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ 0Shepherds[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo ./install.sh[K[2P./install.shls[K./install.shsudo ./install.sh[7P0Shepherdsgogui-regress ./Go0.py assignment1-public-tests.gtpp[A]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ exit[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccp assignment1.tgz testd test[Kgogui-regress ./Go0.py assignment1-public-tests.gtpp[A]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crm assignment1.tgzcd ..[K[3Plsexitcp assignment1.tgz testd test[K[Ktar xvzf assignment1.tgz
+assignment1-public-tests.gtp
+board_util.py
+Go0.py
+gtp_connection.py
+simple_board.py
+test_board_util.py
+test_simple_board.py
+]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ tar xvzf assignment1.tgzcd test[K[16@p assignment1.tgz[C[C[C[C[Cexit[K[2Plscd ..rm assignment1.tgzls[Kgogui-regress ./Go0.py assignment1-public-tests.gtpp[A]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ cd test[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgogui-regress ./Go0.py assignment1-public-tests.gtpp
+]0;kandrosc@DESKTOP-BDQ2KA4: ~/kandrosc/gogui/Gomoku496/assignment1/test[01;32mkandrosc@DESKTOP-BDQ2KA4[00m:[01;34m~/kandrosc/gogui/Gomoku496/assignment1/test[00m$ exit
+exit
+
+Script done on 2019-01-28 20:54:58-0700
