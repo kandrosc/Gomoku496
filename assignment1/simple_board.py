@@ -40,8 +40,6 @@ class SimpleGoBoard(object):
         # Try to play the move on a temporary copy of board
         # This prevents the board from being messed up by the move
         
-        if self.next_color==WHITE:
-            board_copy.setNext(WHITE)
         
         legal = board_copy.play_move(point, color)
         return legal
@@ -67,7 +65,6 @@ class SimpleGoBoard(object):
         The board is stored as a one-dimensional array
         See GoBoardUtil.coord_to_point for explanations of the array encoding
         """
-        self.next_color = BLACK # Stores the color espected to be played next (Black first)
         self.size = size
         self.NS = size + 1
         self.WE = 1
@@ -202,27 +199,21 @@ class SimpleGoBoard(object):
         else:
       
             # Ensure the expected player is playing
-            if color == self.next_color:
                 
-                try:
-                    # Ensure the player is playing on an empty spot
-                    if self.board[point] != EMPTY:
-                        return False
-                    self.board[point] = color
-                    
-
-                    self.store[color].append(point)
-                    self.store[color].sort()
-                    self.next_color = BLACK+WHITE-color
-                    return True
-
-                except ValueError:
-                    print("Board is full, random move cannot be generated")
+            try:
+                # Ensure the player is playing on an empty spot
+                if self.board[point] != EMPTY:
                     return False
+                self.board[point] = color
+                
 
-            else:
-                    #print("Error: Not your turn")
-                    return False
+                self.store[color].append(point)
+                self.store[color].sort()
+                return True
+
+            except ValueError:
+                print("Board is full, random move cannot be generated")
+                return False
 
 
     def neighbors_of_color(self, point, color):
